@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PizzaHutDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cartItems">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="orderId" Type="int" Nullable="false" />
+    <Property Name="pizzaId" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="customers">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="orders">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="processing" Type="bit" Nullable="false" />
+    <Property Name="customerId" Type="int" Nullable="false" />
+    <Property Name="fullprice" Type="decimal" Precision="20" Scale="8" Nullable="false" />
+    <Property Name="deliveryAddress" Type="varchar(max)" Nullable="false" />
+    <Property Name="orderTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pizzas">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ingridients" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="price" Type="decimal" Precision="20" Scale="8" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_cartItem_order">
+    <End Role="orders" Type="Self.orders" Multiplicity="1" />
+    <End Role="cartItems" Type="Self.cartItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="orders">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="cartItems">
+        <PropertyRef Name="orderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_cartItem_pizzas">
+    <End Role="pizzas" Type="Self.pizzas" Multiplicity="1" />
+    <End Role="cartItems" Type="Self.cartItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pizzas">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="cartItems">
+        <PropertyRef Name="pizzaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_order_customer">
+    <End Role="customers" Type="Self.customers" Multiplicity="1" />
+    <End Role="orders" Type="Self.orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customers">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="orders">
+        <PropertyRef Name="customerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PizzaHutDbModelStoreContainer">
+    <EntitySet Name="cartItems" EntityType="Self.cartItems" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customers" EntityType="Self.customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pizzas" EntityType="Self.pizzas" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_cartItem_order" Association="Self.FK_cartItem_order">
+      <End Role="orders" EntitySet="orders" />
+      <End Role="cartItems" EntitySet="cartItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_cartItem_pizzas" Association="Self.FK_cartItem_pizzas">
+      <End Role="pizzas" EntitySet="pizzas" />
+      <End Role="cartItems" EntitySet="cartItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_order_customer" Association="Self.FK_order_customer">
+      <End Role="customers" EntitySet="customers" />
+      <End Role="orders" EntitySet="orders" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

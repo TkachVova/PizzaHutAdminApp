@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PizzaHutDbModelStoreContainer" CdmEntityContainer="PizzaHutDbEntities">
+    <EntitySetMapping Name="cartItems">
+      <EntityTypeMapping TypeName="PizzaHutDbModel.cartItem">
+        <MappingFragment StoreEntitySet="cartItems">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="orderId" ColumnName="orderId" />
+          <ScalarProperty Name="pizzaId" ColumnName="pizzaId" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="customers">
+      <EntityTypeMapping TypeName="PizzaHutDbModel.customer">
+        <MappingFragment StoreEntitySet="customers">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orders">
+      <EntityTypeMapping TypeName="PizzaHutDbModel.order">
+        <MappingFragment StoreEntitySet="orders">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="processing" ColumnName="processing" />
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="fullprice" ColumnName="fullprice" />
+          <ScalarProperty Name="deliveryAddress" ColumnName="deliveryAddress" />
+          <ScalarProperty Name="orderTime" ColumnName="orderTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pizzas">
+      <EntityTypeMapping TypeName="PizzaHutDbModel.pizza">
+        <MappingFragment StoreEntitySet="pizzas">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="ingridients" ColumnName="ingridients" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
